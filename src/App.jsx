@@ -10,7 +10,7 @@ function App() {
     <div 
       className={`
         text-base leading-base tracking-base text-slate-300 
-        min-h-screen p-6 bg-slate-900 flex justify-center ${!isGameStarted ? "items-center" : ""}
+        min-h-screen p-6 bg-slate-900 flex justify-center ${!isGameStarted ? "items-center" : "tablet:items-center"}
       `}
     >
       {isGameStarted ? (

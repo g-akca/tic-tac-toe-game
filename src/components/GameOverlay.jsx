@@ -20,21 +20,21 @@ function GameOverlay() {
 
   return (
     <div className="fixed inset-0 bg-neutral-950/50 flex items-center justify-center z-50">
-      <div className="bg-slate-800 h-57 w-full text-center flex flex-col items-center justify-center">
+      <div className="bg-slate-800 h-57 w-full text-center flex flex-col items-center justify-center tablet:h-66.5">
         {winner ? (
           <>
-            <p className="text-[14px] uppercase font-bold tracking-[0.9px] leading-[130%] text-slate-300">
+            <p className="text-[14px] uppercase font-bold tracking-[0.9px] leading-[130%] text-slate-300 tablet:text-base tablet:leading-base tablet:tracking-base">
               {text}
             </p>
 
             <div className={`flex items-center justify-center mt-4 gap-4 ${winner === "X" ? "text-teal-400" : "text-amber-400"}`}>
               {winner === "X" ? (
-                <XIcon className="h-6.5 w-6.5" />
+                <XIcon className="h-6.5 w-6.5 tablet:h-16 tablet:w-16" />
               ): (
-                <OIcon className="h-6.5 w-6.5" />
+                <OIcon className="h-6.5 w-6.5 tablet:h-16 tablet:w-16" />
               )} 
               
-              <span className="text-[24px] font-bold leading-base tracking-[1.5px] uppercase">takes the round</span>
+              <span className="text-[24px] font-bold leading-base tracking-[1.5px] uppercase tablet:text-[40px] tablet:tracking-[2.5px]">takes the round</span>
             </div>
 
             <div className="mt-6 flex gap-4 h-13">
@@ -57,8 +57,8 @@ function GameOverlay() {
           </>
         ) : isTie ? (
           <>
-            <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase">Round tied</h2>
-            <div className="mt-6 flex gap-4 h-13">
+            <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase tablet:text-[40px] tablet:tracking-[2.5px]">Round tied</h2>
+            <div className="mt-6 flex gap-4 h-13 tablet:mt-7.5">
               <button 
                 type="button" 
                 onClick={resetGame} 
@@ -77,7 +77,7 @@ function GameOverlay() {
           </>
         ) : (
           <>
-            <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase">Restart game?</h2>
+            <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase tablet:text-[40px] tablet:tracking-[2.5px]">Restart game?</h2>
             <div className="mt-6 flex gap-4 h-13">
               <button 
                 type="button" 
