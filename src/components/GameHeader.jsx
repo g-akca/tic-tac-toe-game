@@ -7,7 +7,7 @@ import OIcon from "./icons/OIcon";
 import { useGame } from "../context/GameContext";
 
 function GameHeader() {
-  const { currentPlayer } = useGame();
+  const { currentPlayer, setPaused } = useGame();
 
   return (
     <header className="grid grid-cols-3 gap-5 items-center w-full">
@@ -23,7 +23,7 @@ function GameHeader() {
         <span>Turn</span>
       </div>
 
-      <button className="justify-self-end w-10 h-10 bg-slate-300 rounded-md inset-shadow-[0_-4px_#6B8997] cursor-pointer flex justify-center items-center">
+      <button type="button" onClick={() => setPaused(true)} className="justify-self-end w-10 h-10 bg-slate-300 rounded-md inset-shadow-[0_-4px_#6B8997] cursor-pointer flex justify-center items-center">
         <img src={restartIcon} alt="Restart icon" className="w-4 h-4" />
       </button>
     </header>

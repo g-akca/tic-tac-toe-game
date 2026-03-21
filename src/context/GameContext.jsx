@@ -6,9 +6,10 @@ export function GameProvider({ children }) {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
   const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [gamemode, setGamemode] = useState("solo");
   const [winner, setWinner] = useState(null);
   const [isTie, setIsTie] = useState(false);
-  const [gamemode, setGamemode] = useState("solo");
+  const [paused, setPaused] = useState(false);
 
   const [player1, setPlayer1] = useState({
     id: 1,
@@ -32,7 +33,9 @@ export function GameProvider({ children }) {
     setPlayer1(updatedPlayer1);
     setPlayer2(updatedPlayer2);
 
-    setCurrentPlayer(updatedPlayer1.mark === "X" ? updatedPlayer1 : updatedPlayer2);
+    const startingPlayer = updatedPlayer1.mark === "X" ? updatedPlayer1 : updatedPlayer2;
+
+    setCurrentPlayer(startingPlayer);
 
     setGamemode(mode);
     setIsGameStarted(true);
@@ -68,34 +71,7 @@ export function GameProvider({ children }) {
 
     if (gamemode === "solo") {
       setTimeout(() => {
-        setBoard(prevBoard => {
-          const move = cpuMove(prevBoard);
-
-          const cpuBoard = prevBoard.map((item, ind) => ind === move ? nextPlayer.mark : item);
-
-          const win = checkWinner(cpuBoard);
-
-          if (win) {
-            if (player1.mark === win) {
-              setPlayer1(p => ({ ...p, wins: p.wins + 1 }));
-            }
-            else {
-              setPlayer2(p => ({ ...p, wins: p.wins + 1 }));
-            }
-
-            setWinner(win);
-            return cpuBoard;
-          }
-
-          if (cpuBoard.every(cell => cell !== "")) {
-            setIsTie(true);
-            return cpuBoard;
-          }
-
-          setCurrentPlayer(player1);
-
-          return cpuBoard;
-        });
+        setBoard(prevBoard => runCpuTurn(prevBoard, nextPlayer));
       }, 800);
     }
   }
@@ -121,9 +97,59 @@ export function GameProvider({ children }) {
     return emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
   }
 
+  function runCpuTurn(boardState, cpuPlayer) {
+    const move = cpuMove(boardState);
+
+    const cpuBoard = boardState.map((item, ind) => ind === move ? cpuPlayer.mark : item);
+
+    const win = checkWinner(cpuBoard);
+
+    if (win) {
+      if (player1.mark === win) {
+        setPlayer1(p => ({ ...p, wins: p.wins + 1 }));
+      }
+      else {
+        setPlayer2(p => ({ ...p, wins: p.wins + 1 }));
+      }
+
+      setWinner(win);
+      return cpuBoard;
+    }
+
+    if (cpuBoard.every(cell => cell !== "")) {
+      setIsTie(true);
+      return cpuBoard;
+    }
+
+    setCurrentPlayer(player1);
+
+    return cpuBoard;
+  }
+
+  function resetGame() {
+    setIsGameStarted(false);
+    setBoard(["", "", "", "", "", "", "", "", ""]);
+    setCurrentPlayer(null);
+    setGamemode("solo");
+    setWinner(null);
+    setIsTie(false);
+    setPaused(false);
+    setPlayer1({
+      id: 1,
+      mark: "",
+      wins: 0
+    })
+
+    setPlayer2({
+      id: 2,
+      mark: "",
+      wins: 0
+    })
+  }
+
   return (
     <GameContext.Provider
-      value={{ isGameStarted, startGame, playRound, board, player1, player2, currentPlayer, gamemode }}
+      value={{ isGameStarted, startGame, resetGame, playRound, board, player1, player2, currentPlayer, gamemode, paused, setPaused, winner, isTie }}
     >
       {children}
     </GameContext.Provider>
