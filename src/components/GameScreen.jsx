@@ -13,9 +13,7 @@ function GameScreen() {
 
       <GameBoard />
 
-      {winner || isTie || paused && (
-        <GameOverlay />
-      )}
+      {(winner || isTie || paused) && <GameOverlay />}
     </section>
   )
 }
