@@ -9,6 +9,7 @@ export function GameProvider({ children }) {
   const [gamemode, setGamemode] = useState("solo");
   const [winner, setWinner] = useState(null);
   const [isTie, setIsTie] = useState(false);
+  const [ties, setTies] = useState(0);
   const [paused, setPaused] = useState(false);
 
   const [player1, setPlayer1] = useState({
@@ -63,6 +64,7 @@ export function GameProvider({ children }) {
 
     if (newBoard.every(cell => cell !== "")) {
       setIsTie(true);
+      setTies(prev => prev + 1);
       return true;
     }
 
@@ -148,6 +150,7 @@ export function GameProvider({ children }) {
     setGamemode("solo");
     setWinner(null);
     setIsTie(false);
+    setTies(0);
     setPaused(false);
 
     setPlayer1({ id: 1, mark: "", wins: 0 });
@@ -170,6 +173,7 @@ export function GameProvider({ children }) {
         setPaused,
         winner,
         isTie,
+        ties,
         nextRound
       }}
     >
