@@ -2,6 +2,8 @@ import GameScores from "./GameScores";
 
 import OIcon from "./icons/OIcon";
 import XIcon from "./icons/XIcon";
+import OutlinedOIcon from "./icons/OutlinedOIcon";
+import OutlinedXIcon from "./icons/OutlinedXIcon";
 
 import { useGame } from "../context/GameContext";
 
@@ -16,7 +18,7 @@ function GameBoard() {
         {board.map((item, index) => (
           <div
             key={index}
-            className={`bg-slate-800 w-full pb-2 aspect-square rounded-[10px] inset-shadow-[0_-8px_#10212A] flex items-center justify-center 
+            className={`group bg-slate-800 w-full pb-2 aspect-square rounded-[10px] inset-shadow-[0_-8px_#10212A] flex items-center justify-center 
               ${isCpuTurn ? "pointer-events-none cursor-not-allowed opacity-60" : "cursor-pointer"}
             `}
             onClick={() => {
@@ -29,6 +31,17 @@ function GameBoard() {
             )}
             {item === "O" && (
               <OIcon className="text-amber-400 h-10 w-10" />
+            )}
+
+            {!item && !isCpuTurn && (
+              <>
+                {currentPlayer.mark === "X" && (
+                  <OutlinedXIcon className="h-10 w-10 hidden group-hover:block" />
+                )}
+                {currentPlayer.mark === "O" && (
+                  <OutlinedOIcon className="h-10 w-10 hidden group-hover:block" />
+                )}
+              </>
             )}
           </div>
         ))}
