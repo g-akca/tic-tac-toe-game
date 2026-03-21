@@ -123,6 +123,24 @@ export function GameProvider({ children }) {
     return empty[Math.floor(Math.random() * empty.length)];
   }
 
+  function nextRound() {
+    setBoard(["", "", "", "", "", "", "", "", ""]);
+    setWinner(null);
+    setIsTie(false);
+
+    const starter = player1.mark === "X" ? player1 : player2;
+    setCurrentPlayer(starter);
+
+    if (gamemode === "solo" && starter.id === 2) {
+      setTimeout(() => {
+        const cpuBoard = runCpuTurn(["", "", "", "", "", "", "", "", ""], player2);
+        setBoard(cpuBoard);
+
+        if (!handleGameState(cpuBoard)) setCurrentPlayer(player1);
+      }, 800);
+    }
+  }
+
   function resetGame() {
     setIsGameStarted(false);
     setBoard(["", "", "", "", "", "", "", "", ""]);
@@ -151,7 +169,8 @@ export function GameProvider({ children }) {
         paused,
         setPaused,
         winner,
-        isTie
+        isTie,
+        nextRound
       }}
     >
       {children}
