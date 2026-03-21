@@ -1,9 +1,12 @@
 import GameScores from "./GameScores";
 
+import OIcon from "./icons/OIcon";
+import XIcon from "./icons/XIcon";
+
 import { useGame } from "../context/GameContext";
 
 function GameBoard() {
-  const { board } = useGame();
+  const { board, playRound } = useGame();
 
   return (
     <section className="w-full flex flex-col gap-5">
@@ -11,8 +14,15 @@ function GameBoard() {
         {board.map((item, index) => (
           <div
             key={index}
-            className="bg-slate-800 w-full aspect-square rounded-[10px] inset-shadow-[0_-8px_#10212A]"
+            className="bg-slate-800 w-full pb-2 aspect-square rounded-[10px] inset-shadow-[0_-8px_#10212A] flex items-center justify-center"
+            onClick={() => playRound(index)}
           >
+            {item === "X" && (
+              <XIcon className="text-teal-400 h-10 w-10" />
+            )}
+            {item === "O" && (
+              <OIcon className="text-amber-400 h-10 w-10" />
+            )}
           </div>
         ))}
       </div>

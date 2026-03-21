@@ -3,9 +3,10 @@ import { createContext, useContext, useState } from "react";
 const GameContext = createContext();
 
 export function GameProvider({ children }) {
-  const [isGameStarted, setIsGameStarted] = useState();
+  const [isGameStarted, setIsGameStarted] = useState(false);
   const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
-  const [currentPlayer, setCurrentPlayer] = useState();
+  const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [gamemode, setGamemode] = useState("solo");
 
   const [player1, setPlayer1] = useState({
     id: 1,
@@ -19,8 +20,6 @@ export function GameProvider({ children }) {
     wins: 0
   })
 
-  let gamemode;
-
   function startGame(mark, mode = "solo") {
     const p1Mark = mark === "X" ? "X" : "O";
     const p2Mark = mark === "X" ? "O" : "X";
@@ -33,13 +32,21 @@ export function GameProvider({ children }) {
 
     setCurrentPlayer(updatedPlayer1.mark === "X" ? updatedPlayer1 : updatedPlayer2);
 
-    gamemode = mode;
+    setGamemode(mode);
     setIsGameStarted(true);
+  }
+
+  function playRound(index) {
+    if (board[index] !== "") return;
+
+    setBoard(prev => prev.map((item, ind) => index === ind ? currentPlayer.mark : item));
+
+    setCurrentPlayer(prev => prev.id === 1 ? player2 : player1);
   }
 
   return (
     <GameContext.Provider
-      value={{ isGameStarted, startGame, board, player1, player2, currentPlayer }}
+      value={{ isGameStarted, startGame, playRound, board, player1, player2, currentPlayer }}
     >
       {children}
     </GameContext.Provider>
