@@ -1,5 +1,8 @@
 import logoImg from "/images/logo.svg";
 
+import XIcon from "./icons/XIcon";
+import OIcon from "./icons/OIcon";
+
 function NewGameMenu({ setIsGameStarted }) {
   const startGame = () => {
     setIsGameStarted();
@@ -14,13 +17,13 @@ function NewGameMenu({ setIsGameStarted }) {
           <p className="font-bold uppercase">Pick Player 1's mark</p>
           
           <div className="bg-slate-900 rounded-[10px] p-2.25 grid grid-cols-2">
-            <label className="h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center has-checked:bg-slate-300 has-checked:text-slate-900">
+            <label className="group h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center not-has-checked:hover:bg-slate-850 has-checked:bg-slate-300 has-checked:text-slate-900">
               <input type="radio" name="mark" value="X" className="hidden" defaultChecked />
-              <span>X</span>
+              <XIcon className="text-slate-300 group-has-checked:text-slate-900 h-8 w-8" />
             </label>
-            <label className="h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center has-checked:bg-slate-300 has-checked:text-slate-900">
+            <label className="group h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center not-has-checked:hover:bg-slate-850 has-checked:bg-slate-300 has-checked:text-slate-900">
               <input type="radio" name="mark" value="O" className="hidden" />
-              <span>O</span>
+              <OIcon className="text-slate-300 group-has-checked:text-slate-900 h-8 w-8" />
             </label>
           </div>
         </form>
