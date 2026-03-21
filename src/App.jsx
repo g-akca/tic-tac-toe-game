@@ -1,10 +1,10 @@
-import { useState } from "react"
-
 import NewGameMenu from "./components/NewGameMenu"
 import GameScreen from "./components/GameScreen";
 
+import { useGame } from "./context/GameContext";
+
 function App() {
-  const [isGameStarted, setIsGameStarted] = useState(false);
+  const { isGameStarted } = useGame();
 
   return (
     <div 
@@ -16,7 +16,7 @@ function App() {
       {isGameStarted ? (
         <GameScreen />
       ) : (
-        <NewGameMenu setIsGameStarted={() => setIsGameStarted(true)} />
+        <NewGameMenu />
       )}
     </div>
   )

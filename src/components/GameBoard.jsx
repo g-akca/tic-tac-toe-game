@@ -1,9 +1,9 @@
-import { useState } from "react";
-
 import GameScores from "./GameScores";
 
+import { useGame } from "../context/GameContext";
+
 function GameBoard() {
-  const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""])
+  const { board } = useGame();
 
   return (
     <section className="w-full flex flex-col gap-5">

@@ -1,12 +1,15 @@
+import { useState } from "react";
+
 import logoImg from "/images/logo.svg";
 
 import XIcon from "./icons/XIcon";
 import OIcon from "./icons/OIcon";
 
-function NewGameMenu({ setIsGameStarted }) {
-  const startGame = () => {
-    setIsGameStarted();
-  }
+import { useGame } from "../context/GameContext";
+
+function NewGameMenu() {
+  const { startGame } = useGame();
+  const [mark, setMark] = useState("X");
 
   return (
     <section className="w-full max-w-115 flex flex-col items-center gap-8 text-center">
@@ -18,11 +21,11 @@ function NewGameMenu({ setIsGameStarted }) {
           
           <div className="bg-slate-900 rounded-[10px] p-2.25 grid grid-cols-2">
             <label className="group h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center not-has-checked:hover:bg-slate-850 has-checked:bg-slate-300 has-checked:text-slate-900">
-              <input type="radio" name="mark" value="X" className="hidden" defaultChecked />
+              <input type="radio" name="mark" value="X" className="hidden" onChange={(e) => setMark(e.target.value)} defaultChecked />
               <XIcon className="text-slate-300 group-has-checked:text-slate-900 h-8 w-8" />
             </label>
             <label className="group h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center not-has-checked:hover:bg-slate-850 has-checked:bg-slate-300 has-checked:text-slate-900">
-              <input type="radio" name="mark" value="O" className="hidden" />
+              <input type="radio" name="mark" value="O" className="hidden" onChange={(e) => setMark(e.target.value)} />
               <OIcon className="text-slate-300 group-has-checked:text-slate-900 h-8 w-8" />
             </label>
           </div>
@@ -32,8 +35,8 @@ function NewGameMenu({ setIsGameStarted }) {
       </section>
 
       <div className="w-full text-slate-900 font-bold flex flex-col gap-4">
-        <button type="button" onClick={startGame} className="h-14 pb-1 rounded-2xl w-full uppercase bg-amber-400 cursor-pointer inset-shadow-[0_-8px_#CC8B13]">New Game (VS CPU)</button>
-        <button type="button" onClick={startGame} className="h-14 pb-1 rounded-2xl w-full uppercase bg-teal-400 cursor-pointer inset-shadow-[0_-8px_#118C87]">New Game (VS Player)</button>
+        <button type="button" onClick={() => startGame(mark, "solo")} className="h-14 pb-1 rounded-2xl w-full uppercase bg-amber-400 hover:bg-amber-300 cursor-pointer inset-shadow-[0_-8px_#CC8B13]">New Game (VS CPU)</button>
+        <button type="button" onClick={() => startGame(mark, "multi")} className="h-14 pb-1 rounded-2xl w-full uppercase bg-teal-400 hover:bg-teal-300 cursor-pointer inset-shadow-[0_-8px_#118C87]">New Game (VS Player)</button>
       </div>
     </section>
   )
