@@ -4,7 +4,7 @@ import XIcon from "./icons/XIcon";
 import OIcon from "./icons/OIcon";
 
 function GameOverlay() {
-  const { winner, isTie, resetGame, player1, player2, gamemode } = useGame();
+  const { winner, isTie, resetGame, player1, player2, gamemode, setPaused } = useGame();
 
   const winningPlayer = player1.mark === winner ? player1 : player2;
   let text;
@@ -56,13 +56,17 @@ function GameOverlay() {
           </>
         ) : isTie ? (
           <>
-            
+            <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase">Round tied</h2>
+            <div className="mt-6 flex gap-4 h-13">
+              <button type="button" onClick={resetGame} className="p-4 rounded-[10px] bg-slate-300 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold">Quit</button>
+              <button type="button" className="p-4 rounded-[10px] bg-amber-400 cursor-pointer inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold">Next round</button>
+            </div>
           </>
         ) : (
           <>
             <h2 className="text-2xl font-bold leading-base tracking-[1.25px] uppercase">Restart game?</h2>
             <div className="mt-6 flex gap-4 h-13">
-              <button type="button" className="p-4 rounded-[10px] bg-slate-300 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold">No, cancel</button>
+              <button type="button" onClick={() => setPaused(false)} className="p-4 rounded-[10px] bg-slate-300 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold">No, cancel</button>
               <button type="button" onClick={resetGame} className="p-4 rounded-[10px] bg-amber-400 cursor-pointer inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold">Yes, restart</button>
             </div>
           </>
