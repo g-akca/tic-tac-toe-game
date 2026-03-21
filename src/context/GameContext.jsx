@@ -7,28 +7,39 @@ export function GameProvider({ children }) {
   const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
   const [currentPlayer, setCurrentPlayer] = useState();
 
-  let player1Mark, player2Mark, gamemode;
+  const [player1, setPlayer1] = useState({
+    id: 1,
+    mark: "",
+    wins: 0
+  })
 
-  function startGame(mark, mode="solo") {
-    if (mark === "X") {
-      player1Mark = "X";
-      player2Mark = "O";
-      setCurrentPlayer(1);
-    }
-    else {
-      player1Mark = "O";
-      player2Mark = "X";
-      setCurrentPlayer(2);
-    }
+  const [player2, setPlayer2] = useState({
+    id: 2,
+    mark: "",
+    wins: 0
+  })
+
+  let gamemode;
+
+  function startGame(mark, mode = "solo") {
+    const p1Mark = mark === "X" ? "X" : "O";
+    const p2Mark = mark === "X" ? "O" : "X";
+
+    const updatedPlayer1 = { ...player1, mark: p1Mark };
+    const updatedPlayer2 = { ...player2, mark: p2Mark };
+
+    setPlayer1(updatedPlayer1);
+    setPlayer2(updatedPlayer2);
+
+    setCurrentPlayer(updatedPlayer1.mark === "X" ? updatedPlayer1 : updatedPlayer2);
 
     gamemode = mode;
-
     setIsGameStarted(true);
   }
 
   return (
     <GameContext.Provider
-      value={{ isGameStarted, startGame, board }}
+      value={{ isGameStarted, startGame, board, player1, player2, currentPlayer }}
     >
       {children}
     </GameContext.Provider>
