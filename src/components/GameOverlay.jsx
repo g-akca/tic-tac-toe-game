@@ -41,7 +41,7 @@ function GameOverlay() {
               <button
                 type="button"
                 onClick={resetGame}
-                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer transition-all inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
               >
                 Quit
               </button>
@@ -49,7 +49,7 @@ function GameOverlay() {
               <button
                 type="button"
                 onClick={nextRound}
-                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer transition-all inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
               >
                 Next round
               </button>
@@ -62,14 +62,14 @@ function GameOverlay() {
               <button 
                 type="button" 
                 onClick={resetGame} 
-                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer transition-all inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
               >
                 Quit
               </button>
               <button 
                 type="button" 
                 onClick={nextRound} 
-                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer transition-all inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
               >
                 Next round
               </button>
@@ -82,14 +82,14 @@ function GameOverlay() {
               <button 
                 type="button" 
                 onClick={() => setPaused(false)} 
-                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-slate-300 hover:bg-slate-100 cursor-pointer transition-all inset-shadow-[0_-4px_#6B8997] text-slate-900 uppercase font-bold"
               >
                 No, cancel
               </button>
               <button 
                 type="button" 
                 onClick={resetGame} 
-                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
+                className="p-4 rounded-[10px] bg-amber-400 hover:bg-amber-300 cursor-pointer transition-all inset-shadow-[0_-4px_#CC8B13] text-slate-900 uppercase font-bold"
               >
                 Yes, restart
               </button>

@@ -19,7 +19,7 @@ function GameBoard() {
           <div
             key={index}
             className={`group bg-slate-800 w-full pb-2 aspect-square rounded-[10px] inset-shadow-[0_-8px_#10212A] flex items-center justify-center 
-              ${isCpuTurn ? "pointer-events-none cursor-not-allowed opacity-60" : "cursor-pointer"}
+              ${isCpuTurn || item ? "cursor-not-allowed" : "cursor-pointer"} ${isCpuTurn ? "opacity-60" : ""}
             `}
             onClick={() => {
               if (isCpuTurn) return;
@@ -36,10 +36,10 @@ function GameBoard() {
             {!item && !isCpuTurn && (
               <>
                 {currentPlayer.mark === "X" && (
-                  <OutlinedXIcon className="h-10 w-10 hidden group-hover:block tablet:h-16 tablet:w-16" />
+                  <OutlinedXIcon className="h-10 w-10 opacity-0 group-hover:opacity-100 transition-all duration-300 tablet:h-16 tablet:w-16" />
                 )}
                 {currentPlayer.mark === "O" && (
-                  <OutlinedOIcon className="h-10 w-10 hidden group-hover:block tablet:h-16 tablet:w-16" />
+                  <OutlinedOIcon className="h-10 w-10 opacity-0 group-hover:opacity-100 transition-all duration-300 tablet:h-16 tablet:w-16" />
                 )}
               </>
             )}

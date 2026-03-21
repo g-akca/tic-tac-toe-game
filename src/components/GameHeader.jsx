@@ -29,7 +29,7 @@ function GameHeader() {
         <span>Turn</span>
       </div>
 
-      <button type="button" onClick={() => setPaused(true)} className="justify-self-end w-10 h-10 tablet:w-13 tablet:h-13 bg-slate-300 hover:bg-slate-100 rounded-md inset-shadow-[0_-4px_#6B8997] cursor-pointer flex justify-center items-center">
+      <button type="button" onClick={() => setPaused(true)} className="justify-self-end w-10 h-10 tablet:w-13 tablet:h-13 bg-slate-300 hover:bg-slate-100 transition-all rounded-md inset-shadow-[0_-4px_#6B8997] cursor-pointer flex justify-center items-center">
         <img src={restartIcon} alt="Restart icon" className="w-4 h-4 tablet:w-5 tablet:h-5" />
       </button>
     </header>
