@@ -15,7 +15,7 @@ function NewGameMenu({ setIsGameStarted }) {
           
           <div className="bg-slate-900 rounded-[10px] p-2.25 grid grid-cols-2">
             <label className="h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center has-checked:bg-slate-300 has-checked:text-slate-900">
-              <input type="radio" name="mark" value="X" className="hidden" checked />
+              <input type="radio" name="mark" value="X" className="hidden" defaultChecked />
               <span>X</span>
             </label>
             <label className="h-13.5 rounded-[10px] cursor-pointer flex items-center justify-center has-checked:bg-slate-300 has-checked:text-slate-900">
